@@ -15,6 +15,14 @@ class TestCalculoNumeros(unittest.TestCase):
         numero = ingrese_numero()
         self.assertEqual(numero, 100)
 
+    @patch(  # este patch controla lo que hace el input
+        'builtins.input',
+        return_value='-100'
+    )
+    def test_ingreso_negativo(self, patch_input):
+        with self.assertRaises(NumeroDebeSerPositivo):
+            ingrese_numero()    
+
     
 
 if __name__ == '__main__':
